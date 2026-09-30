@@ -1,0 +1,12 @@
+# Install PyTorch for your CUDA version first (the paper runs used the cu124 wheels):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+transformers @ git+https://github.com/huggingface/transformers@v4.51.3-Qwen2.5-Omni-preview
+accelerate>=1.6.0
+peft>=0.15.0
+qwen-omni-utils[decord]>=0.0.8
+decord>=0.6.0
+soundfile>=0.12.1
+librosa>=0.10.2
+av>=12.0.0
+numpy>=1.26
+tqdm>=4.66

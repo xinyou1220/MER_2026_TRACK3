@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+data/
+data_weak/
+data_test/
+data_mixed/
+splits/
+runs/
+results/
+outputs/
+logs/
+*.pt
+*.zip
