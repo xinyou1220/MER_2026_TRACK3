@@ -27,6 +27,8 @@ this symmetry during training and at inference:
    majority choice in the opposite order), an out-of-fold Bradley–Terry text-ranker margin and a
    candidate-length penalty. The three auxiliary terms are squashed as τ·tanh(·) with τ < 1, so
    they never rank a wrong answer above a right one. Unparsable outputs get a fixed reward of −1.7.
+   With K = 4 the opposite order can split 2–2; such ties resolve to `a2` (`>= 0.5` in
+   `sympo_mer/reward.py`), which is the rule used for the paper's runs.
 3. **REINFORCE++ update.** Group-mean baseline per (pair, order), one global advantage
    normalization over the batch, PPO clipping and a k2 KL loss. There is no critic. The reference
    policy is the base model with the LoRA adapter disabled.

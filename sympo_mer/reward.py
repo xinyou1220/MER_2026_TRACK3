@@ -14,6 +14,9 @@ Invalid outputs:
   invalid_floor: R = -(w_c + tau_labeled + m)                                  (Eq. 12)
   valid_bonus:   valid rows get +w_format, invalid rows get -(1 + w_format)    (naive RL)
   additive:      every row gets +/- w_format and keeps its other channels       (ablation)
+
+Majority swap consistency: a tie in the opposite order (e.g. 2-2 with K = 4) resolves to
+candidate c1 (a2). The paper's results were produced with this rule.
 """
 
 from __future__ import annotations
@@ -41,6 +44,8 @@ def _majority_consistency(chosen, pair_id, orientation, valid):
             own = pair_mask & (orientation == o) & valid
             other = pair_mask & (orientation == 1 - o) & valid
             if own.any() and other.any():
+                # Ties (e.g. 2-2 with K = 4) resolve to candidate c1 (a2) because of ">= 0.5".
+                # The paper's runs used this rule; it rewards choosing a2 on tied pairs in both orders.
                 consensus = (chosen_f[other].mean() >= 0.5).long()
                 consistency[own] = (chosen[own] == consensus).float()
     return consistency
